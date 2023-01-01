@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { JourneysService } from './journeys.service';
 import { CreateJourneyDto } from './dto/create-journey.dto';
@@ -16,13 +17,13 @@ export class JourneysController {
   constructor(private readonly journeysService: JourneysService) {}
 
   @Post()
-  create(@Body() createJourneyDto: CreateJourneyDto) {
+  async create(@Body() createJourneyDto: CreateJourneyDto) {
     return this.journeysService.create(createJourneyDto);
   }
 
   @Get()
-  findAll() {
-    return this.journeysService.findAll();
+  async findAll(@Query() query) {
+    return this.journeysService.findAll(query);
   }
 
   @Get(':id')

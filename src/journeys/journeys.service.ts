@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { plainToInstance } from 'class-transformer';
 import { Repository } from 'typeorm';
 import { CreateJourneyDto } from './dto/create-journey.dto';
+import { ReadJourneyDto } from './dto/read-journey.dto';
 import { UpdateJourneyDto } from './dto/update-journey.dto';
 import { Journey } from './entities/journey.entity';
+
+interface JourneyQuery {
+  take: number;
+  skip: number;
+  page: number;
+}
 
 @Injectable()
 export class JourneysService {
@@ -46,8 +54,19 @@ export class JourneysService {
     return await this.journeyRepository.clear();
   }
 
-  findAll() {
-    return `This action returns all journeys`;
+  //Paginated find-function to journeys
+  async findAll(query: JourneyQuery): Promise<ReadJourneyDto[]> {
+    const take = query?.take || 10;
+    const page = query?.page || 1;
+    const skip = (page - 1) * take;
+
+    const users = await this.journeyRepository.find({
+      take: take,
+      skip: skip,
+      order: { departure: 'DESC' },
+    });
+
+    return plainToInstance(ReadJourneyDto, users);
   }
 
   findOne(id: number) {
