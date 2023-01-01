@@ -10,9 +10,9 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.PSQL_USER,
   password: process.env.PSQL_PW,
   database: process.env.PSQL_DATABASE,
-  entities: ['dist/src/**/*.entity.js'],
+  entities: ['dist/**/*.entity.js'],
   synchronize: process.env.MODE == 'production' ? false : true, // no sync on production
-  migrations: ['dist/src/db/migrations/*.js'],
+  migrations: ['dist/db/migrations/*.js'],
 };
 
 const dataSource = new DataSource(dataSourceOptions);

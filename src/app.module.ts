@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { dataSourceOptions } from './db/data-source';
 import { JourneysModule } from './journeys/journeys.module';
+import { JourneysService } from './journeys/journeys.service';
 
 @Module({
   imports: [

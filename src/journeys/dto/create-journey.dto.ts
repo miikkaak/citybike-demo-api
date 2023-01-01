@@ -3,14 +3,14 @@ import {
   IsNumber,
   MaxLength,
   MinLength,
-  IsDate,
+  IsDateString,
 } from 'class-validator';
 
 export class CreateJourneyDto {
-  @IsDate()
+  @IsDateString()
   departure: Date;
 
-  @IsDate()
+  @IsDateString()
   returnTime: Date;
 
   @IsString()
@@ -33,5 +33,5 @@ export class CreateJourneyDto {
   distance: number;
 
   @IsNumber()
-  durations: number;
+  duration: number;
 }
