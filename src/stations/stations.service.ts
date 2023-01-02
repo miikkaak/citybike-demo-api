@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { plainToInstance } from 'class-transformer';
 import { Repository } from 'typeorm';
 import { CreateStationDto } from './dto/create-station.dto';
+import { ReadStationDto } from './dto/read-station.dto';
 import { UpdateStationDto } from './dto/update-station.dto';
 import { Station } from './entities/station.entity';
+
+interface StationsQuery {
+  take: number;
+  page: number;
+  skip: number;
+}
 
 @Injectable()
 export class StationsService {
@@ -39,8 +47,18 @@ export class StationsService {
     return await this.repository.clear();
   }
 
-  findAll() {
-    return `This action returns all stations`;
+  async findAll(query: StationsQuery): Promise<ReadStationDto[]> {
+    const take = query?.take || 10;
+    const page = query?.page || 1;
+    const skip = (page - 1) * take;
+
+    const users = await this.repository.find({
+      take: take,
+      skip: skip,
+      order: { name: 'ASC' },
+    });
+
+    return plainToInstance(ReadStationDto, users);
   }
 
   findOne(id: number) {
