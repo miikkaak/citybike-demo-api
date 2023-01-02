@@ -26,8 +26,13 @@ export class StationsController {
     return this.stationsService.findAll(query);
   }
 
+  @Get('count')
+  async getCount() {
+    return this.stationsService.getCount();
+  }
+
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.stationsService.findOne(+id);
   }
 

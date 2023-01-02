@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateStationDto } from './dto/create-station.dto';
 import { ReadStationDto } from './dto/read-station.dto';
 import { UpdateStationDto } from './dto/update-station.dto';
@@ -11,6 +11,7 @@ interface StationsQuery {
   take: number;
   page: number;
   skip: number;
+  keyword: string;
 }
 
 @Injectable()
@@ -51,8 +52,10 @@ export class StationsService {
     const take = query?.take || 10;
     const page = query?.page || 1;
     const skip = (page - 1) * take;
+    const keyword = query?.keyword?.toString() || '';
 
     const users = await this.repository.find({
+      where: { name: Like('%' + keyword + '%') },
       take: take,
       skip: skip,
       order: { name: 'ASC' },
@@ -61,8 +64,16 @@ export class StationsService {
     return plainToInstance(ReadStationDto, users);
   }
 
+  // Get count for server side pagination
+  async getCount(): Promise<number> {
+    return await this.repository.count();
+  }
+
   findOne(id: number) {
-    return `This action returns a #${id} station`;
+    return plainToInstance(
+      ReadStationDto,
+      this.repository.findOne({ where: { id: id } }),
+    );
   }
 
   update(id: number, updateStationDto: UpdateStationDto) {
