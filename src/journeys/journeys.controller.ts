@@ -26,6 +26,11 @@ export class JourneysController {
     return this.journeysService.findAll(query);
   }
 
+  @Get('count')
+  async getCount() {
+    return this.journeysService.getCount();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.journeysService.findOne(+id);

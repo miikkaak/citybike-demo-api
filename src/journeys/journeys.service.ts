@@ -69,6 +69,11 @@ export class JourneysService {
     return plainToInstance(ReadJourneyDto, users);
   }
 
+  // Get count for server side pagination
+  async getCount(): Promise<number> {
+    return await this.journeyRepository.count();
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} journey`;
   }

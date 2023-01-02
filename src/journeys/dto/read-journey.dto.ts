@@ -11,6 +11,10 @@ import {
 export class ReadJourneyDto {
   @Expose()
   @IsString()
+  id: string;
+
+  @Expose()
+  @IsString()
   depStationName: string;
 
   @Expose()
