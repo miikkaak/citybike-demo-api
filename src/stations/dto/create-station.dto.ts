@@ -37,15 +37,15 @@ export class CreateStationDto {
 
   @IsString()
   @MaxLength(255)
-  address: string;
-
-  @IsString()
-  @MaxLength(255)
   city: string;
 
   @IsString()
   @MaxLength(255)
   citySWE: string;
+
+  @IsString()
+  @MaxLength(255)
+  operator: string;
 
   @IsNumber()
   capacity: number;

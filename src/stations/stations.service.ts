@@ -17,16 +17,17 @@ export class StationsService {
   }
 
   async createMany(
-    createJourneyDtos: Array<CreateStationDto>,
+    createStationDtos: Array<CreateStationDto>,
   ): Promise<Boolean> {
     console.log(
-      `Queueing ${createJourneyDtos.length} items for database write...`,
+      `Queueing ${createStationDtos.length} items for database write...`,
     );
     try {
-      const newJourneys = this.repository.create(createJourneyDtos);
-      const saved = this.repository.save(newJourneys, { chunk: 500 });
+      const newStations = this.repository.create(createStationDtos);
+      // console.log(newStations);
+      const saved = this.repository.save(newStations, { chunk: 500 });
       saved.then(() => {
-        console.log(`${createJourneyDtos.length} entries saved successfully`);
+        console.log(`${createStationDtos.length} entries saved successfully`);
         return true;
       });
     } catch (error) {

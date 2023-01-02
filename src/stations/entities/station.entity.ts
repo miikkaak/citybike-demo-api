@@ -62,23 +62,23 @@ export class Station {
   @IsString()
   @MaxLength(255)
   @Column({
-    nullable: false,
-  })
-  address: string;
-
-  @IsString()
-  @MaxLength(255)
-  @Column({
-    nullable: false,
+    nullable: true,
   })
   city: string;
 
   @IsString()
   @MaxLength(255)
   @Column({
-    nullable: false,
+    nullable: true,
   })
   citySWE: string;
+
+  @IsString()
+  @MaxLength(255)
+  @Column({
+    nullable: true,
+  })
+  operator: string;
 
   @IsNumber()
   @Column({
@@ -89,12 +89,18 @@ export class Station {
   @IsLongitude()
   @Column({
     nullable: false,
+    type: 'decimal',
+    precision: 10,
+    scale: 6,
   })
   lon: number;
 
   @IsLatitude()
   @Column({
     nullable: false,
+    type: 'decimal',
+    precision: 10,
+    scale: 6,
   })
   lat: number;
 }
