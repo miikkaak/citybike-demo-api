@@ -36,6 +36,16 @@ export class JourneysController {
     return this.journeysService.findOne(+id);
   }
 
+  @Get('from/:id')
+  findFrom(@Param('id') id: string) {
+    return this.journeysService.findFrom(id);
+  }
+
+  @Get('to/:id')
+  findTo(@Param('id') id: string) {
+    return this.journeysService.findTo(id);
+  }
+
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateJourneyDto: UpdateJourneyDto) {
   //   return this.journeysService.update(+id, updateJourneyDto);

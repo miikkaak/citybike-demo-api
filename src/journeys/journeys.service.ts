@@ -78,6 +78,20 @@ export class JourneysService {
     return `This action returns a #${id} journey`;
   }
 
+  // Find all with given departure station id
+  async findFrom(id: string) {
+    return await this.journeyRepository.find({
+      where: { depStationId: id },
+    });
+  }
+
+  // Find all with given return station id
+  async findTo(id: string) {
+    return await this.journeyRepository.find({
+      where: { retStationId: id },
+    });
+  }
+
   // update(id: number, updateJourneyDto: UpdateJourneyDto) {
   //   return `This action updates a #${id} journey`;
   // }
