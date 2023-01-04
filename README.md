@@ -14,9 +14,9 @@ $ npm install
 
 Local PostgreSQL database is used by default. You can specify the database in .env file.
 
-To build the database, have your database credentials specified and query _{APP_URL}/build_. Returns _true_ on successful build. Console will output results also.
+To build the database, put the .csv-files in their corresponding folders inside /src/data/**, have your database credentials specified and post _{APP_URL}/build_. Returns _true_ on build start. Server console will output the progress.
 
-NOTE! To speed up the build you can place .csv-files on their corresponding folders inside /src/data/. Otherwise data will be downloaded from internet.
+Note! I'll provide a ready-built database as an alternative, because the database build process is quite slow
 
 ## Running the app
 

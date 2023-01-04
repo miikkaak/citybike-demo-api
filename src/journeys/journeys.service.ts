@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { CreateJourneyDto } from './dto/create-journey.dto';
 import { ReadJourneyDto } from './dto/read-journey.dto';
 import { UpdateJourneyDto } from './dto/update-journey.dto';
@@ -18,6 +18,7 @@ export class JourneysService {
   constructor(
     @InjectRepository(Journey)
     private journeyRepository: Repository<Journey>,
+    private dataSource: DataSource,
   ) {}
 
   async create(createJourneyDto: CreateJourneyDto): Promise<Journey> {
@@ -40,6 +41,7 @@ export class JourneysService {
     );
     try {
       const newJourneys = this.journeyRepository.create(createJourneyDtos);
+      // console.log(newStations);
       const saved = this.journeyRepository.save(newJourneys, { chunk: 500 });
       saved.then(() => {
         console.log(`${createJourneyDtos.length} entries saved successfully`);
@@ -48,6 +50,21 @@ export class JourneysService {
     } catch (error) {
       return false;
     }
+    // try {
+    //   const newJourneys = this.journeyRepository.create(createJourneyDtos);
+
+    //   const saved = await this.dataSource
+    //     .createQueryBuilder()
+    //     .insert()
+    //     .into(Journey)
+    //     .values(newJourneys)
+    //     .execute();
+
+    //   console.log(saved);
+    //   return true;
+    // } catch (error) {
+    //   return false;
+    // }
   }
 
   async truncate() {
