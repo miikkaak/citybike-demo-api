@@ -18,7 +18,6 @@ export class JourneysService {
   constructor(
     @InjectRepository(Journey)
     private journeyRepository: Repository<Journey>,
-    private dataSource: DataSource,
   ) {}
 
   async create(createJourneyDto: CreateJourneyDto): Promise<Journey> {
