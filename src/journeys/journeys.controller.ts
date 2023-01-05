@@ -31,18 +31,18 @@ export class JourneysController {
     return this.journeysService.getCount();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.journeysService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.journeysService.findOne(+id);
+  // }
 
   @Get('from/:id')
-  findFrom(@Param('id') id: string) {
+  async findFrom(@Param('id') id: string) {
     return this.journeysService.findFrom(id);
   }
 
   @Get('to/:id')
-  findTo(@Param('id') id: string) {
+  async findTo(@Param('id') id: string) {
     return this.journeysService.findTo(id);
   }
 

@@ -9,17 +9,15 @@ import {
   Query,
 } from '@nestjs/common';
 import { StationsService } from './stations.service';
-import { CreateStationDto } from './dto/create-station.dto';
-import { UpdateStationDto } from './dto/update-station.dto';
 
 @Controller('stations')
 export class StationsController {
   constructor(private readonly stationsService: StationsService) {}
 
-  @Post()
-  create(@Body() createStationDto: CreateStationDto) {
-    return this.stationsService.create(createStationDto);
-  }
+  // @Post()
+  // create(@Body() createStationDto: CreateStationDto) {
+  //   return this.stationsService.create(createStationDto);
+  // }
 
   @Get()
   async findAll(@Query() query) {
@@ -36,13 +34,13 @@ export class StationsController {
     return this.stationsService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStationDto: UpdateStationDto) {
-    return this.stationsService.update(+id, updateStationDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateStationDto: UpdateStationDto) {
+  //   return this.stationsService.update(+id, updateStationDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.stationsService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.stationsService.remove(+id);
+  // }
 }

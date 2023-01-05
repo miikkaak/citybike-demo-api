@@ -21,9 +21,9 @@ export class StationsService {
     private readonly repository: Repository<Station>,
   ) {}
 
-  create(createStationDto: CreateStationDto) {
-    return 'This action adds a new station';
-  }
+  // create(createStationDto: CreateStationDto) {
+  //   return 'This action adds a new station';
+  // }
 
   async createMany(
     createStationDtos: Array<CreateStationDto>,
@@ -69,18 +69,18 @@ export class StationsService {
     return await this.repository.count();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return plainToInstance(
       ReadStationDto,
       this.repository.findOne({ where: { id: id } }),
     );
   }
 
-  update(id: number, updateStationDto: UpdateStationDto) {
-    return `This action updates a #${id} station`;
-  }
+  // update(id: number, updateStationDto: UpdateStationDto) {
+  //   return `This action updates a #${id} station`;
+  // }
 
-  remove(id: number) {
-    return `This action removes a #${id} station`;
-  }
+  // remove(id: number) {
+  //   return `This action removes a #${id} station`;
+  // }
 }

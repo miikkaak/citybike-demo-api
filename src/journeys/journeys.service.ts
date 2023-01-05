@@ -91,9 +91,9 @@ export class JourneysService {
     return await this.journeyRepository.count();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} journey`;
-  }
+  // findOne(id: number) {
+  //   return `This action returns a #${id} journey`;
+  // }
 
   // Find all with given departure station id
   async findFrom(id: string) {
