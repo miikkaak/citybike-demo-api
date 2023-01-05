@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
-import { Like, Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateStationDto } from './dto/create-station.dto';
 import { ReadStationDto } from './dto/read-station.dto';
 import { UpdateStationDto } from './dto/update-station.dto';
@@ -55,7 +55,7 @@ export class StationsService {
     const keyword = query?.keyword?.toString() || '';
 
     const users = await this.repository.find({
-      where: { name: Like('%' + keyword + '%') },
+      where: { name: ILike('%' + keyword + '%') },
       take: take,
       skip: skip,
       order: { name: 'ASC' },
