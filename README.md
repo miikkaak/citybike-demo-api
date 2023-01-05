@@ -14,7 +14,7 @@ $ npm install
 
 Local PostgreSQL database is used by default. You can specify the database in .env file.
 
-To build the database, put the .csv-files in their corresponding folders inside /src/data/\*\*, have your database credentials specified and post _{APP_URL}/build_. Returns _true_ on build start. Server console will output the progress.
+To build the database, put the .csv-files in their corresponding folders inside /src/data/\*\*, have your database credentials specified and post _{APP_URL}/build_. Returns _true_ on build start. Server console will output the progress. Running migrations is not necessary because entities are synced in development mode, but you can also run the migrations with "npm run migration:run".
 
 Note! I'll provide a ready-built database as an alternative, because the database build process is quite slow
 
